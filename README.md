@@ -18,7 +18,7 @@ a web api for allowing ips on certain ports using links and UFW on linux, it als
 
 ## With Binaries
 
-Using server binary you don't need any arguments just the regular config.json file should be enough
+Using server binary you don't need any arguments just the regular config.json file should be enough, you can access binaries [here](https://github.com/safra36/ip-auth/releases)
 
 ```
 {
