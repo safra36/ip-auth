@@ -3,13 +3,14 @@ a web api for allowing ips on certain ports using links and UFW on linux, it als
 
 # Installation
 
-- If you are using the server source don't forget to install express using `npm install express`
+- If you are using the server source don't forget to install express using `npm install express`.
 - This app works with UFW so install it on your server:
 `sudo apt-get install ufw`
 `sudo ufw allow ssh`
 `sudo ufw enable`
-- Run server as ROOT or with sudo to access your UFW firewall
-
+- Run server as ROOT or with sudo to access your UFW firewall.
+- Make sure to create server certificates for https (since the server is only https):
+` openssl req -nodes -new -x509 -keyout server.key -out server.cert `
 
 
 
