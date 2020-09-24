@@ -219,7 +219,7 @@ function main()
         try
         {
             console.log(`Checking IP addresses ...`)
-            console.log(JSON.stringify(AuthenticatedIps));
+            // console.log(JSON.stringify(AuthenticatedIps));
     
             for(var i = AuthenticatedIps.length;i > 0; i--)
             {
@@ -233,6 +233,30 @@ function main()
                     console.log(`Time for ${ipObject.ip} has been exceeded, remove it's ip from allowed list ...`);
                     SetUFWRemoveAllowedIP(ipObject.ip, ipObject.port);
                     AuthenticatedIps.splice(i-1, 1);
+                }
+                else
+                {
+                    console.log(`Data ${ipObject.ip}:${ipObject.port} is okay to stay, verifying if it exists on the firewall or not ...`)
+
+                    GetUFWIndexOfIPPort(ipObject.ip, ipObject.port, () => {
+
+                        console.log(`Verification Success!`)
+
+                    }, () => {
+
+                        console.log(`Verification Failed! the ip is no longer allowed on firewall for some reason, re-adding the ip ...`)
+
+                        SetUFWAllowIPOnPort(ipObject.ip, ipObject.port, () => {
+
+                            console.log(`IP Re-Allowed!`)
+
+                        }, (error) => {
+
+                            console.log(`IP could not be re-allowed: ${error}`)
+                        })
+
+                    })
+
                 }
             }
         }
@@ -339,7 +363,7 @@ GetUFWStatusObject = (trueCallBack, falseCallback) => {
         var lines = stdout.split('\n');
         for(const line of lines)
         {
-            console.log(`line: ${line}`)
+            // console.log(`line: ${line}`)
             lineValidator.push({
                 value:line,
                 index:lines.indexOf(line)
