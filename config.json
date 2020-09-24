@@ -1,0 +1,10 @@
+{
+    "portos":{
+        "openvpn":8080
+    },
+    "ip":"",
+    "port":3000,
+    "key":"",
+    "timeout":5000,
+    "timer":20000
+}

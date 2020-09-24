@@ -1,2 +1,47 @@
 # ip-auth
-a web api for allowing ips on certain ports using links and UFW on linux
+a web api for allowing ips on certain ports using links and UFW on linux, it also comes with a client to automate authentication on servers and clients.
+
+# Installation
+
+- If you are using the server source don't forget to install express using `npm install express`
+- This app works with UFW so install it on your server:
+`sudo apt-get install ufw`
+`sudo ufw allow ssh`
+`sudo ufw enable`
+- Run server as ROOT or with sudo to access your UFW firewall
+
+
+
+
+# Usage
+
+## With Binaries
+
+Using server binary you don't need any arguments just the regular config.json file should be enough
+
+```
+{
+    "portos":{
+        "openvpn":8080      // Define proto name and target port (Here we are allowing our ip for ovpn server running on port 8080)
+    },
+    "ip":"",        // Your server IP
+    "port":3000,        // web service default port
+    "key":"",       // Client authentication key
+    "timeout":5000,     // How many seconds an ip will be timed out
+    "timer":20000       // How often the server check for clients
+}
+```
+
+
+Using the client there are several arguments to launch your app with:
+- proto: the proto name you defined in protos of your server
+- ip: target server IP
+- port: target server Port
+- key: target server authentication key
+
+
+## Without binaries
+
+There is not much difference, just follow these steps:
+- Install express using `npm install express` (required for server)
+- Run server/client using `node main.js`
