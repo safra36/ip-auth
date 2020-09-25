@@ -49,7 +49,7 @@ There is not much difference, just follow these steps:
 - Run server/client using `node main.js`
 
 
-### For Client
+### For Client (Access using https request or open on web browser)
 - If you want to manually use the link try: `https://IP:PORT/key/YOUR_KEY/proto/YOUR_PROTO`
 - If you cannot access your ip directly or want to allow someone's else ip without giving them the key, do it using `https://IP:PORT/key/YOUR_KEY/proto/YOUR_PROTO?ip=1.1.1.1` syntax
 
