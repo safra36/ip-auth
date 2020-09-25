@@ -238,22 +238,29 @@ function main()
                 {
                     console.log(`Data ${ipObject.ip}:${ipObject.port} is okay to stay, verifying if it exists on the firewall or not ...`)
 
-                    GetUFWIndexOfIPPort(ipObject.ip, ipObject.port, () => {
+                    GetUFWIndexOfIPPort(ipObject.ip, ipObject.port, (ResultArray) => {
 
-                        console.log(`Verification Success!`)
+                        if(ResultArray.length > 0)
+                        {
+                            console.log(`Verification Success!`)
+                        }
+                        else
+                        {
 
-                    }, () => {
+                            console.log(`Verification Failed! the ip is no longer allowed on firewall for some reason, re-adding the ip ...`)
+                            SetUFWAllowIPOnPort(ipObject.ip, ipObject.port, () => {
 
-                        console.log(`Verification Failed! the ip is no longer allowed on firewall for some reason, re-adding the ip ...`)
+                                console.log(`IP Re-Allowed!`)
+    
+                            }, (error) => {
+    
+                                console.log(`IP could not be re-allowed: ${error}`)
+                            })
+                        }
 
-                        SetUFWAllowIPOnPort(ipObject.ip, ipObject.port, () => {
+                    }, (error) => {
 
-                            console.log(`IP Re-Allowed!`)
-
-                        }, (error) => {
-
-                            console.log(`IP could not be re-allowed: ${error}`)
-                        })
+                        console.log(`Error getting ip verified, cirtical error: ${error}`);
 
                     })
 
@@ -449,9 +456,9 @@ GetUFWIndexOfIPPort = (ip, port, trueCallBack, falseCallback) => {
 
         trueCallBack(ReturnArray);
 
-    }, () => {
+    }, (error) => {
 
-        falseCallback();
+        falseCallback(error);
 
     })
     
