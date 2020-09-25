@@ -43,6 +43,13 @@ Using the client there are several arguments to launch your app with:
 
 ## Without binaries
 
+### For Server
 There is not much difference, just follow these steps:
 - Install express using `npm install express` (required for server)
 - Run server/client using `node main.js`
+
+
+### For Client
+- If you want to manually use the link try: `https://IP:PORT/key/YOUR_KEY/proto/YOUR_PROTO`
+- If you cannot access your ip directly or want to allow someone's else ip without giving them the key, do it using `https://IP:PORT/key/YOUR_KEY/proto/YOUR_PROTO?ip=1.1.1.1` syntax
+
